@@ -17,14 +17,14 @@
         </div>
         <div id="file-select">
             <select id="wordsbank-select" required>
-                <option id="default-option" disabled selected>파일을 선택해주세요</option>
+                <option id="default-option" value="default-option" disabled selected>파일을 선택해주세요</option>
             </select>
         </div>
     </div>
     <dir></dir>
     <div id="mode">
         <select id="mode-select" required>
-            <option disabled selected>모드를 선택해주세요</option>
+            <option value="default-option" disabled selected>모드를 선택해주세요</option>
             <option value="kor-to-eng">한 -> 영</option>
             <option value="eng-to-kor">영 -> 한</option>
             <option value="random">무작위</option>
@@ -33,9 +33,10 @@
     <dir></dir>
     <div id="questions-number">
         <select id="questions-number-select" required>
-            <option disabled selected>총 문제 수를 선택해주세요</option>
+            <option value="default-option" disabled selected>총 문제 수를 선택해주세요</option>
             <option value="30">30문제</option>
             <option value="100">100문제</option>
+            <option value="200">200문제</option>
             <option value="all">전체(단어장)</option>
         </select>
     </div>
@@ -43,7 +44,9 @@
     <div id="start">
         <button id="start-button" type="button">시험 시작하기</button>
     </div>
+
+    <script src="script/indexedDB.js"></script>
+    <script src="script/file.js"></script>
+    <script src="script/test-start.js"></script>
 </body>
-<script src="file.js"></script>
-<script src="test-start.js"></script>
 </html>

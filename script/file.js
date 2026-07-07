@@ -1,39 +1,3 @@
-// indexedDB 연결
-function openIndexedDB() {
-    return new Promise((resolve, reject) => {
-        // DB open
-        const request = indexedDB.open("EnglishTest", 1);
-
-        // DB 업그레이드 필요 여부 조회 및 업그레이드
-        request.onupgradeneeded = (event) => {
-            const db = event.target.result;
-
-            db.createObjectStore("wordsbank", {
-                keyPath:"id",
-                autoIncrement:true
-            });
-        }
-
-        // 연결 성공
-        request.onsuccess = (event) => {
-            const db = event.target.result;
-            resolve(db);
-        }
-
-        // 연결 실패
-        request.onerror = () => {
-            reject("DB 연결 실패");
-        }
-    });
-}
-
-// db 연결 초기화
-let db = null;
-
-async function dbReady() {
-    db = await openIndexedDB();
-}
-
 // file 제목 및 내용 불러오기
 const submitBtn = document.getElementById("wordsbank-upload");
 const wordsbankSelect = document.getElementById("wordsbank-select");
@@ -84,7 +48,8 @@ function uploadFile() {
 
 // 리스트 불러오기
 function loadWordsbanks(){
-    return new Promise((resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
+        const db = await getIndexedDB();
         const transaction = db.transaction("wordsbank","readonly");
         const store = transaction.objectStore("wordsbank");
         const getAllRequest = store.getAll();
@@ -139,7 +104,8 @@ async function synchronizationOptions() {
 
 // indexedDB 초기화(디버깅용)
 function deleteAllIndexedDB() {
-    return new Promise((resolve, reject) => {
+    return new Promise(async(resolve, reject) => {
+        const db = await getIndexedDB();
         const transaction = db.transaction("wordsbank","readwrite");
         const store = transaction.objectStore("wordsbank");
         const deleteAllRequest = store.clear();
@@ -156,24 +122,24 @@ function deleteAllIndexedDB() {
 
 // 페이지 로딩시 함수 실행
 document.addEventListener("DOMContentLoaded", async () => {
-    await dbReady();
-
     synchronizationOptions();
 })
 
 // 클릭감지 및 함수 실행
 submitBtn.addEventListener("click", async () => {
+    const db = await getIndexedDB();
     if (db === null) {
         alert("데이터베이스를 준비중입니다. 잠시 후 다시 시도해주세요.");
         return;
     }
 
-    if (await uploadFile() === null) {
+    const fileData = await uploadFile();
+    if (fileData === null) {
         return;
     }
 
     // indexedDB에 title과 words를 저장
-    const {title, words} = await uploadFile();
+    const {title, words} = fileData;
 
     // 중복 여부 확인
     const DB = await loadWordsbanks();
