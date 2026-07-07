@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="nickname">
+        <input type="text" id="nickname-input" placeholder="이름을 입력해주세요">
+    </div>
+    <dir></dir>
+    <div id="file">
+        <div id="file-input">
+            <input type="file" id="wordsbank-input" accept=".txt,.csv">
+            <button type="submit" id="wordsbank-upload">업로드</button>
+        </div>
+        <div id="file-select">
+            <select id="wordsbank-select" required>
+                <option id="default-option" disabled selected>파일을 선택해주세요</option>
+            </select>
+        </div>
+    </div>
+    <dir></dir>
+    <div id="mode">
+        <select id="mode-select" required>
+            <option disabled selected>모드를 선택해주세요</option>
+            <option value="kor-to-eng">한 -> 영</option>
+            <option value="eng-to-kor">영 -> 한</option>
+            <option value="random">무작위</option>
+        </select>
+    </div>
+    <dir></dir>
+    <div id="questions-number">
+        <select id="questions-number-select" required>
+            <option disabled selected>총 문제 수를 선택해주세요</option>
+            <option value="30">30문제</option>
+            <option value="100">100문제</option>
+            <option value="all">전체(단어장)</option>
+        </select>
+    </div>
+    <dir></dir>
+    <div id="start">
+        <button type="button">시험 시작하기</button>
+    </div>
+</body>
+<script src="file.js"></script>
+</html>
