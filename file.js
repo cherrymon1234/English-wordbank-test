@@ -186,7 +186,7 @@ submitBtn.addEventListener("click", async () => {
     if (wordsbanks.includes(title)) {
         alert("이미 추가된 파일입니다.");
         return;
-    }
+    };
 
     const transaction = db.transaction("wordsbank","readwrite");
     const store = transaction.objectStore("wordsbank");
