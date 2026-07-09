@@ -1,4 +1,12 @@
+// 변수 선언
+import { state, getIndexedDB } from "./state.js";
+import { examStart } from "./exam-show.js";
 const startBtn = document.getElementById("start-button");
+
+// 배열 섞기
+function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+}
 
 // value값에 맞는 DB 추출
 function getMatchDB(title) {
@@ -57,7 +65,7 @@ function createQuestion(wordsbank, mode) {
 }
 
 // 선택 선지 생성
-function createAnswerOptions(wordsbank, leng) {
+function createAnswerOptions(wordsbank, leng, answer) {
     // 언어를 받아와서 DB리스트에서 랜덤으로 4개 추출
     const DB = wordsbank.words;
     const answerOptions = [];
@@ -67,15 +75,40 @@ function createAnswerOptions(wordsbank, leng) {
         answerOptions.push(DB[index][leng]);
     }
 
+    answerOptions.push(answer);
+
+    shuffle(answerOptions);
+
     return answerOptions;
 }
 
-// 배열 섞기
-function shuffle(array) {
-    array.sort(() => Math.random() - 0.5);
+//시험 생성
+function createExam(wordsbank, mode, questionCount) {
+    const Exam = [];
+
+    for (let index = 0; index < questionCount; index++) {
+        const questions = createQuestion(wordsbank, mode);
+        const option = createAnswerOptions(wordsbank, questions.ansLeng, questions.answer);
+
+        Exam.push({
+            question: questions.question,
+            answer: questions.answer,
+            option: option
+        })
+    }
+
+    return Exam;
 }
 
+// 버튼 클릭 감지 시 함수 실행
 startBtn.addEventListener("click", async () => {
+    //이름
+    const name = document.getElementById("nickname-input").value;
+    if (name === "") {
+        alert("이름을 입력해주세요");
+        return;
+    }
+
     // 파일선택
     const choosnWordsbank = document.getElementById("wordsbank-select").value; // eng-words.txt
     if (choosnWordsbank === "default-option") {
@@ -106,15 +139,11 @@ startBtn.addEventListener("click", async () => {
     }
     
     // 최종 출력
-    const questions = createQuestion(wordsbank, mode);
-    const options = createAnswerOptions(wordsbank, questions.ansLeng)
-    options.push(questions.answer);
-    shuffle(options);
+    state.exam.questions = createExam(wordsbank, mode, questionCount);
+    state.exam.questionCount = questionCount;
+    state.exam.mode = mode;
+    state.user.name = name;
+    state.user.choosnWordsbank = choosnWordsbank;
 
-    return {
-        question: questions.question,
-        answer: questions.answer,
-        answerOption: options,
-        questionCount: questionCount
-    };
+    examStart();
 })

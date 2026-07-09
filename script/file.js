@@ -1,7 +1,10 @@
 // file 제목 및 내용 불러오기
+import { state } from "./state.js";
+import { getIndexedDB } from "./state.js";
 const submitBtn = document.getElementById("wordsbank-upload");
 const wordsbankSelect = document.getElementById("wordsbank-select");
 
+// 선택한 파일 데이터 꺼내기
 function uploadFile() {
     const file = document.getElementById("wordsbank-input").files[0];
     if (!file) {
@@ -102,24 +105,6 @@ async function synchronizationOptions() {
     });
 }
 
-// indexedDB 초기화(디버깅용)
-function deleteAllIndexedDB() {
-    return new Promise(async(resolve, reject) => {
-        const db = await getIndexedDB();
-        const transaction = db.transaction("wordsbank","readwrite");
-        const store = transaction.objectStore("wordsbank");
-        const deleteAllRequest = store.clear();
-
-        deleteAllRequest.onsuccess = () => {
-            resolve("DB 초기화 완료");
-        }
-
-        deleteAllRequest.onerror = () => {
-            reject("DB 초기화 실패");
-        }
-    });
-}
-
 // 페이지 로딩시 함수 실행
 document.addEventListener("DOMContentLoaded", async () => {
     synchronizationOptions();
@@ -164,6 +149,6 @@ submitBtn.addEventListener("click", async () => {
 
     addRequest.onsuccess = () =>{
         synchronizationOptions();
-        console.log("save success")
+        console.log("File Save Success")
     }
 });

@@ -1,0 +1,15 @@
+#select-page{
+    display: block;
+}
+
+#exam-page{
+    display: none;
+}
+
+#exam-finish-page{
+    display: none;
+}
+
+#ranking-page{
+    display: none;
+}

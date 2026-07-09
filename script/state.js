@@ -26,13 +26,28 @@ function openIndexedDB() {
     });
 }
 
-// db 연결 초기화
-let db = null;
+// 전역변수 생성
+export const state = {
+    db: null,
+    firebaseDB: null,
+    exam: {
+        examIndex: 0,
+        score: 0,
+        mode: "",
+        questions: [],
+        questionCount:0
+    },
+    user: {
+        name: "",
+        choosnWordsbank: ""
+    }
+}
 
-async function getIndexedDB() {
-    if (db === null) {
-        db = await openIndexedDB();
+// db 연결 초기화
+export async function getIndexedDB() {
+    if (state.db === null) {
+        state.db = await openIndexedDB();
     }
 
-    return db;
+    return state.db;
 }

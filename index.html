@@ -4,49 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="nickname">
-        <input type="text" id="nickname-input" placeholder="이름을 입력해주세요">
-    </div>
-    <dir></dir>
-    <div id="file">
-        <div id="file-input">
-            <input type="file" id="wordsbank-input" accept=".txt,.csv">
-            <button type="submit" id="wordsbank-upload">업로드</button>
+    <div id="select-page">
+        <div id="nickname">
+            <input type="text" id="nickname-input" placeholder="이름을 입력해주세요">
         </div>
-        <div id="file-select">
-            <select id="wordsbank-select" required>
-                <option id="default-option" value="default-option" disabled selected>파일을 선택해주세요</option>
+        <div id="file">
+            <div id="file-input">
+                <input type="file" id="wordsbank-input" accept=".txt,.csv">
+                <button type="submit" id="wordsbank-upload">업로드</button>
+            </div>
+            <div id="file-select">
+                <select id="wordsbank-select" required>
+                    <option id="default-option" value="default-option" disabled selected>파일을 선택해주세요</option>
+                </select>
+            </div>
+        </div>
+        <div id="mode">
+            <select id="mode-select" required>
+                <option value="default-option" disabled selected>모드를 선택해주세요</option>
+                <option value="kor-to-eng">한 -> 영</option>
+                <option value="eng-to-kor">영 -> 한</option>
+                <option value="random">무작위</option>
             </select>
         </div>
+        <div id="questions-number">
+            <select id="questions-number-select" required>
+                <option value="default-option" disabled selected>총 문제 수를 선택해주세요</option>
+                <option value="2">2문제(테스트용)</option>
+                <option value="1">1문제(테스트용)</option>
+                <option value="30">30문제</option>
+                <option value="100">100문제</option>
+                <option value="200">200문제</option>
+                <option value="all">전체(단어장)</option>
+            </select>
+        </div>
+        <div id="start">
+            <button id="start-button" type="button">시험 시작하기</button>
+        </div>
     </div>
-    <dir></dir>
-    <div id="mode">
-        <select id="mode-select" required>
-            <option value="default-option" disabled selected>모드를 선택해주세요</option>
-            <option value="kor-to-eng">한 -> 영</option>
-            <option value="eng-to-kor">영 -> 한</option>
-            <option value="random">무작위</option>
-        </select>
-    </div>
-    <dir></dir>
-    <div id="questions-number">
-        <select id="questions-number-select" required>
-            <option value="default-option" disabled selected>총 문제 수를 선택해주세요</option>
-            <option value="30">30문제</option>
-            <option value="100">100문제</option>
-            <option value="200">200문제</option>
-            <option value="all">전체(단어장)</option>
-        </select>
-    </div>
-    <dir></dir>
-    <div id="start">
-        <button id="start-button" type="button">시험 시작하기</button>
+    
+    <div id="exam-page">
+        <div id="question">
+            <h3 id="question-text">단어나 뜻</h3>
+        </div>
+        <div id="question-count">
+            <h3 id="question-count-text">0/??</h3>
+        </div>
+        <div id="answer-options">
+            <button type="button" class="answer-option" value="option1">option1</button>
+            <button type="button" class="answer-option" value="option2">option2</button>
+            <button type="button" class="answer-option" value="option3">option3</button>
+            <button type="button" class="answer-option" value="option4">option4</button>
+            <button type="button" class="answer-option" value="option5">option5</button>
+        </div>
     </div>
 
-    <script src="script/indexedDB.js"></script>
-    <script src="script/file.js"></script>
-    <script src="script/test-start.js"></script>
+    <div id="exam-finish-page">
+        <div id="exam-result">
+            <div class="exam-result" id="selected-file">eng-words.txt</div>
+            <div class="exam-result" id="selected-mode">kor-to-eng</div>
+            <div class="exam-result" id="exam-score">10/30</div>
+        </div>
+    </div>
+
+    <div id="ranking-page">
+        <h3>랭킹</h3>
+
+        <table id="ranking-table">
+            <thead>
+                    <tr>
+                        <tr>순위</tr>
+                        <tr>이름</tr>
+                        <tr>파일</tr>
+
+                    </tr>
+            </thead>
+        </table>
+    </div>
+
+    <script type="module" src="script/firebaseDB.js"></script>
+    <script type="module" src="script/state.js"></script>
+    <script type="module" src="script/file.js"></script>
+    <script type="module" src="script/exam-finish.js"></script>
+    <script type="module" src="script/exam-show.js"></script>
+    <script type="module" src="script/exam-start.js"></script>
 </body>
 </html>
