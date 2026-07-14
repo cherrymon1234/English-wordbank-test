@@ -1,5 +1,5 @@
 // firebaseDB 연결
-import { state } from "./state.js";
+import { state } from "../state.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
         
@@ -14,4 +14,4 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const firestoreDB = getFirestore(app);
+state.firestoreDB = getFirestore(app);

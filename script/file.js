@@ -1,11 +1,8 @@
 // file 제목 및 내용 불러오기
 import { state } from "./state.js";
-import { getIndexedDB } from "./state.js";
-const submitBtn = document.getElementById("wordsbank-upload");
+import { getIndexedDB } from "./DB/indexedDB.js";
 const wordsbankSelect = document.getElementById("wordsbank-select");
-export const selectPage = document.getElementById("main-page");
-export const examPage = document.getElementById("exam-page");
-export const examFinishPage = document.getElementById("exam-result-page");
+const submitBtn = document.getElementById("wordsbank-upload");
 
 // 선택한 파일 데이터 꺼내기
 function uploadFile() {
@@ -71,7 +68,7 @@ function loadWordsbanks(){
 }
 
 // 현재 리스트 내역을 option과 동기화하기
-async function synchronizationOptions() {
+export async function synchronizationOptions() {
     // DB, opt 조회
     const DB = await loadWordsbanks();
     const wordsbanks = [];
@@ -107,12 +104,6 @@ async function synchronizationOptions() {
         };
     });
 }
-
-// 페이지 로딩시 함수 실행
-document.addEventListener("DOMContentLoaded", async () => {
-    synchronizationOptions();
-    selectPage.classList.add("show");
-})
 
 // 클릭감지 및 함수 실행
 submitBtn.addEventListener("click", async () => {

@@ -1,13 +1,14 @@
 // 변수 선언
-import { state } from "./state.js";
-import { examFinish} from "./exam-finish.js";
-import { selectPage, examPage } from "./file.js";
+import { state } from "../state.js";
+import { changePage } from "../page.js";
+import { selectPage } from "./select-page.js";
+import { examFinish } from "./exam-result-page.js";
 const question = document.getElementById("question-text");
 const questionCount = document.getElementById("question-count-text");
 const answerOptions = document.querySelectorAll(".answer-option");
 const prograssBar = document.getElementById("progress-bar");
 const optionDefaultColor = "#27ae60";
- 
+export const examPage = document.getElementById("exam-page");
 
 // 시험 요소 설정
 function setExamQuestions() {
@@ -29,7 +30,7 @@ function updatePrograssBar(current, total) {
 }
 
 // 정답 여부 스타일 변경 및 점수 계산
-export function isSelectedCurrentAnswer(choosnOption) {
+function isSelectedCurrentAnswer(choosnOption) {
     const examIndex = state.exam.examIndex;
     let currentAnswer = null;
 
@@ -75,8 +76,8 @@ answerOptions.forEach(option => {
 
 // 화면 변경
 export function examStart() {
-    selectPage.classList.remove("show");
-    examPage.classList.add("show");
+    changePage(selectPage, examPage);
 
     setExamQuestions();
+    updatePrograssBar(state.exam.examIndex, state.exam.questionCount);
 }

@@ -1,7 +1,16 @@
 // 변수 선언
-import { state, getIndexedDB } from "./state.js";
-import { examStart } from "./exam-show.js";
+import { state } from "../state.js";
+import { getIndexedDB } from "../DB/indexedDB.js";
+import { synchronizationOptions } from "../file.js";
+import { examStart } from "./exam-page.js";
 const startBtn = document.getElementById("start-button");
+export const selectPage = document.getElementById("select-page");
+
+// 페이지 로딩시 함수 실행
+document.addEventListener("DOMContentLoaded",() => {
+    synchronizationOptions();
+    selectPage.classList.add("show");
+})
 
 // 배열 섞기
 function shuffle(array) {
@@ -9,7 +18,7 @@ function shuffle(array) {
 }
 
 // value값에 맞는 DB 추출
-function getMatchDB(title) {
+export function getMatchDB(title) {
     return new Promise(async(resolve, reject) => {
         const db = await getIndexedDB();
         const transaction = db.transaction("wordsbank","readonly");
@@ -83,7 +92,7 @@ function createAnswerOptions(wordsbank, leng, answer) {
 }
 
 //시험 생성
-function createExam(wordsbank, mode, questionCount) {
+export function createExam(wordsbank, mode, questionCount) {
     const Exam = [];
 
     for (let index = 0; index < questionCount; index++) {

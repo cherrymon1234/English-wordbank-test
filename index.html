@@ -51,7 +51,7 @@
         <!-- main-container -->
         <main id="main-container">
             <!-- main-page -->
-            <section id="main-page" class="page">
+            <section id="select-page" class="page">
                 <!-- nickname -->
                 <div id="nickname">
                     <input type="text" id="nickname-input" placeholder="이름을 입력해주세요">
@@ -131,9 +131,35 @@
             <!-- exam-result-page -->
             <section id="exam-result-page" class="page">
                 <div id="exam-result">
-                    <div class="exam-result" id="selected-file">eng-words.txt</div>
-                    <div class="exam-result" id="selected-mode">kor-to-eng</div>
-                    <div class="exam-result" id="exam-score">10/30</div>
+                    <div class="exam-result">
+                        단어장: <span id="selected-file">eng-words.txt</span>
+                    </div>
+
+                    <div class="exam-result">
+                        모드: <span id="selected-mode">kor-to-eng</span>
+                    </div>
+
+                    <div class="exam-result">
+                        맞은 개수: <span id="exam-score">10</span>
+                    </div>
+
+                    <div class="exam-result">
+                        틀린 개수: <span id="exam-incorrect">20</span>
+                    </div>
+
+                    <div class="exam-result">
+                        정답률: <span id="exam-accuracy">70%</span>
+                    </div>
+
+                    <div class="exam-result">
+                        총 문제 수: <span id="exam-questionCount">30</span>
+                    </div>
+                </div>
+
+                <div id="exam-result-page-buttons">
+                    <button type="button" id="return-button">돌아가기</button>
+                    <button type="button" id="replay-button">다시하기</button>
+                    <button type="button" id="ranking-button">랭킹보기</button>
                 </div>
             </section>
 
@@ -158,12 +184,14 @@
         </main>
     </div>
 
-    <script type="module" src="script/firebaseDB.js"></script>
     <script type="module" src="script/state.js"></script>
+    <script type="module" src="script/DB/indexedDB.js"></script>
+    <script type="module" src="script/DB/firebaseDB.js"></script>
     <script type="module" src="script/file.js"></script>
-    <script type="module" src="script/exam-finish.js"></script>
-    <script type="module" src="script/exam-show.js"></script>
-    <script type="module" src="script/exam-start.js"></script>
+    <script type="module" src="script/page.js"></script>
+    <script type="module" src="script/page/select-page.js"></script>
+    <script type="module" src="script/page/exam-page.js"></script>
+    <script type="module" src="script/page/exam-result-page.js"></script>
     <script type="module" src="script/sidebar.js"></script>
 </body>
 </html>

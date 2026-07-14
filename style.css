@@ -190,7 +190,3 @@ body {
 /* 5. 요소 스타일링 */
 input, select { width: 100%; padding: 14px; margin: 8px 0; border: 1px solid #ddd; border-radius: 10px; }
 button { padding: 15px; border-radius: 10px; border: none; background: #27ae60; color: white; cursor: pointer; font-weight: bold; margin-top: 10px; }
-
-@media (max-width: 480px) {
-    #main-container { margin: 20px 10px; border-radius: 15px; }
-}
