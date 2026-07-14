@@ -2,9 +2,8 @@
 import { firestoreDB } from "./firebaseDB.js";
 import { collection, query, where, getDocs, setDoc, doc} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 import { state } from "./state.js";
+import { examPage, examFinishPage } from "./file.js";
 
-const examPage = document.getElementById("exam-page");
-const examFinishPage = document.getElementById("exam-finish-page");
 const examFinishSelectedFile = document.getElementById("selected-file");
 const examFinishSelectedMode = document.getElementById("selected-mode");
 const examFinishScore = document.getElementById("exam-score");
@@ -50,8 +49,8 @@ async function saveResult(result) {
 
 // 시험 마무리 html 관리
 export function examFinish() {
-    examPage.style.display = "none";
-    examFinishPage.style.display = "block"
+    examPage.classList.remove("show");
+    examFinishPage.classList.add("show");
 
     examFinishSelectedFile.innerText = state.user.choosnWordsbank;
     examFinishSelectedMode.innerText = state.exam.mode;
@@ -64,8 +63,8 @@ export function examFinish() {
         score: state.exam.score,
         questionCount: state.exam.questionCount,
         accuracy: (state.exam.score / state.exam.questionCount) * 100,
-        saveTitme: new Date().getTime()
+        saveTime: new Date().getTime()
     }
-    
+
     saveResult(result);
 }
