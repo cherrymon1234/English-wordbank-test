@@ -11,6 +11,7 @@ export const state = {
         score: 0,
         mode: "",
         questions: [],
-        questionCount:0
+        questionCount:0,
+        examData: []
     }
 }

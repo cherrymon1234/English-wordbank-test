@@ -17,14 +17,6 @@
             <!-- title -->
             <h1 class="title">Word Test</h1>
         </div>
-
-        <!-- streak count -->
-        <div class="streak-count">
-            🔥<span id="streak-count-number">0</span>
-        </div>
-
-        <!-- user button -->
-        <button id="user-button" type="button">user</button>
     </header>
 
     <!-- layer -->
@@ -32,17 +24,8 @@
         <!-- on left menu-sidebar -->
         <aside id="menu-sidebar" class="sidebar-panel">
             <nav class="sidebar-menu">
-                <a href="#">단어장 관리</a>
-                <a href="#">시험 기록</a>
+                <a id="view-ranking">랭킹보기</a>
             </nav>
-        </aside>
-
-        <!-- on right menu-sidebar -->
-        <aside id="user-sidebar" class="sidebar-panel">
-            <div class="sidebar-menu">
-                <a href="#">프로필 수정</a>
-                <a href="#">로그아웃</a>
-            </div>
         </aside>
     </div>
 
@@ -85,8 +68,6 @@
                 <div id="questions-number">
                     <select id="questions-number-select" required>
                         <option value="default-option" disabled selected>총 문제 수를 선택해주세요</option>
-                        <option value="2">2문제(테스트용)</option>
-                        <option value="1">1문제(테스트용)</option>
                         <option value="30">30문제</option>
                         <option value="100">100문제</option>
                         <option value="200">200문제</option>
@@ -165,18 +146,29 @@
 
             <!-- ranking-page -->
             <section id="ranking-page" class="page">
-                <h3>랭킹</h3>
-                
-                <table id="ranking-table">
-                    <thead>
-                            <tr>
-                                <tr>순위</tr>
-                                <tr>이름</tr>
-                                <tr>파일</tr>
+                <!-- ranking-head -->
+                <div class="ranking-head">
+                    <button id="ranking-return-button" type="button">돌아가기</button>
+                    <h2 id="ranking-title">랭킹</h2>
 
-                            </tr>
-                    </thead>
-                </table>
+                    <div class="ranking-filters">
+                        <div class="ranking-selected-file-text">
+                            <select id="ranking-selected-file" required>
+                                <option value="default-option" disabled selected>파일을 선택해주세요</option>
+                            </select>
+                        </div>
+
+                        <div class="ranking-questionCount-text">
+                            <select id="ranking-questionCount" required>
+                                <option value="default-option" disabled selected>총 문제 수를 선택해주세요</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ranking-list -->
+                <div class="ranking-list" id="ranking-list">
+                </div>
             </section>
 
             <!-- history-page -->
@@ -192,6 +184,7 @@
     <script type="module" src="script/page/select-page.js"></script>
     <script type="module" src="script/page/exam-page.js"></script>
     <script type="module" src="script/page/exam-result-page.js"></script>
+    <script type="module" src="script/page/ranking-page.js"></script>
     <script type="module" src="script/sidebar.js"></script>
 </body>
 </html>

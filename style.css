@@ -30,21 +30,6 @@ body {
 }
 .title { font-size: 1.5rem; font-weight: bold; }
 
-/* 3. 연속학습 배치 (유저 버튼 옆이나 특정 위치로 이동) */
-/* HTML 수정 없이 user-button의 바로 옆으로 배치를 시도합니다 */
-.streak-count {
-    font-size: 0.9rem;
-    color: #bdc3c7;
-    order: 2; /* user-button(3번)보다 먼저 오게 설정 가능 */
-    margin-left: 250px; /* user-button과의 간격 */
-}
-
-/* 유저 버튼 스타일 고정 */
-#user-button {
-    order: 3;
-    font-size: 1.3rem;
-}
-
 #menu-button{
     width: 70px;
     font-size: 1.3rem;
@@ -52,7 +37,7 @@ body {
 
 /* 3. 중앙 박스 (기존 방식) */
 #main-container {
-    max-width: 450px;
+    max-width: min(450px,95%);
     margin: 40px auto;
     background: white;
     padding: 30px;
@@ -126,6 +111,106 @@ body {
     background-color: #f8f9fa;
 }
 
+/* 결과 페이지 전체 레이아웃 */
+#exam-result-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 결과 정보 박스 스타일 */
+#exam-result {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+}
+
+/* 각 행 스타일 */
+.exam-result {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 데이터 강조 (숫자/텍스트) */
+.exam-result span {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* 정답률 특별 강조 */
+#exam-accuracy {
+    color: #27ae60;
+    font-size: 1.2rem;
+}
+
+/* 하단 버튼 영역 */
+#exam-result-page-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2열로 배치 */
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#exam-result-page-buttons button {
+    margin-top: 0;
+    padding: 12px;
+}
+
+/* 버튼 색상 차별화 */
+#return-button { background-color: #95a5a6; }
+#replay-button { background-color: #27ae60; }
+#ranking-button { background-color: #3498db; grid-column: span 2; } /* 랭킹보기는 넓게 */
+
+/* 랭킹 제목 중앙 정렬 */
+#ranking-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* 필터 영역 (왼쪽/오른쪽 정렬) */
+.ranking-filters {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 15px 10px;
+    border-bottom: 2px solid #eee;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* 랭킹 아이템 (가로 한 줄) */
+.ranking-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #f8f9fa;
+    font-size: 1rem;
+}
+
+/* 1위, 2위 강조 등 스타일링 */
+.rank-number { font-weight: bold; color: #27ae60; width: 50px; }
+.user-name { flex-grow: 1; text-align: left; padding-left: 20px; }
+.user-score { font-weight: bold; }
+.user-accuracy { font-weight: bold; padding-left: 60px; }
+
+/* 데이터가 없을 때 스타일 */
+.ranking-item .empty-data {
+    display: block; /* 줄 전체를 차지하게 함 */
+    width: 100%;
+    text-align: center;
+    color: #95a5a6;
+    padding: 20px 0;
+    font-style: italic;
+}
+
 /* 4. 페이지 표시 로직 */
 #main-container .page {
     display: none;
@@ -174,7 +259,6 @@ body {
 }
 
 #menu-sidebar { left: 0; border-right: 1px solid #eee; }
-#user-sidebar { right: 0; border-left: 1px solid #eee; }
 
 /* 내부 메뉴 디자인 */
 .sidebar-menu a {

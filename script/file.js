@@ -50,7 +50,7 @@ function uploadFile() {
 }
 
 // 리스트 불러오기
-function loadWordsbanks(){
+export function loadWordsbanks(){
     return new Promise(async(resolve, reject) => {
         const db = await getIndexedDB();
         const transaction = db.transaction("wordsbank","readonly");

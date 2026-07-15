@@ -32,28 +32,44 @@ function updatePrograssBar(current, total) {
 // 정답 여부 스타일 변경 및 점수 계산
 function isSelectedCurrentAnswer(choosnOption) {
     const examIndex = state.exam.examIndex;
-    let currentAnswer = null;
+    const currentAnswer = Array.from(answerOptions).find(option => option.value === state.exam.questions[examIndex].answer);
 
-    answerOptions.forEach(option => {
-        if (option.value === state.exam.questions[examIndex].answer) {
-            currentAnswer = option;
-        }
-    })
+    if (!currentAnswer) {
+        choosnOption.style.background = "rgb(239, 83, 80)";
+        return false;
+    }
 
     if (choosnOption === currentAnswer) {
         currentAnswer.style.background = "#32754e";
         state.exam.score++;
+        return true;
     }
     else {
         currentAnswer.style.background = "#32754e";
         choosnOption.style.background = "rgb(239, 83, 80)";
+        return false;
     }
+}
+
+// examData 저장
+function saveExamData(selectedOption, iscorrect) {
+    const index = state.exam.examIndex;
+    const data = {
+        question: state.exam.questions[index].question,
+        answer: state.exam.questions[index].answer,
+        option: state.exam.questions[index].option,
+        selected: selectedOption.value,
+        correct: iscorrect
+    };
+    state.exam.examData.push(data);
+    return data;
 }
 
 // option 버튼별 클릭 감지 및 함수 실행
 answerOptions.forEach(option => {
     option.addEventListener("click", () => {
-        isSelectedCurrentAnswer(option);
+        const isCorrect = isSelectedCurrentAnswer(option);
+        saveExamData(option, isCorrect);
         state.exam.examIndex++;
 
         if (state.exam.examIndex < state.exam.questionCount) {

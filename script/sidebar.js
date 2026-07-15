@@ -1,8 +1,10 @@
 // 변수 선언
+import { changePage } from "./page.js";
+import { selectPage } from "./page/select-page.js";
+import { rankingPage } from "./page/ranking-page.js";
 const menuButton = document.getElementById("menu-button");
-const userButton = document.getElementById("user-button");
 const menuSidebar = document.getElementById("menu-sidebar");
-const userSidebar = document.getElementById("user-sidebar");
+const rankingButton = document.getElementById("view-ranking");
 
 // 사이드바 보이기
 function openSidebar(option) {
@@ -21,6 +23,6 @@ menuButton.addEventListener("click", () => {
     openSidebar(menuSidebar);
 });
 
-userButton.addEventListener("click", () => {
-    openSidebar(userSidebar);
-});
+rankingButton.addEventListener("click", () => {
+    changePage(selectPage, rankingPage);
+})
